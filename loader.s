@@ -24,6 +24,7 @@ extern kmain   ; the function kmain is defined elsewhere
         push dword 3            ; arg3
     	push dword 2            ; arg2
     	push dword 1            ; arg1
+    	
     	call kmain       ; call the function, the result will be in eax
     .loop:
         jmp .loop                   ; loop forever
