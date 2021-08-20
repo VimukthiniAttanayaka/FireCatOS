@@ -1,6 +1,7 @@
 #include "serial.h"
 #include "io.h"
 #include "Memory_segment.h"
+#include "interrupts.h"
 
 char *fb = (char*) 0x000B8000;
 
@@ -75,5 +76,6 @@ int kmain(int arg1, int arg2, int arg3)
     	serial_write(SERIAL_COM1_BASE, buffer, 18);
 	//fb_write_cell(0, 'A', FB_GREEN, FB_DARK_GREY);
 	//fb_move_cursor(00);
+	interrupts_install_idt();
 	return arg1 + arg2 + arg3;
 }
