@@ -1,8 +1,7 @@
-#include "drivers/serial.h"
-#include "drivers/io.h"
+#include "serial.h"
+#include "io.h"
 #include "Memory_segment.h"
-#include "interrupt/interrupts.h"
-#include "multiboot.h"
+#include "interrupts.h"
 
 char *fb = (char*) 0x000B8000;
 
@@ -69,28 +68,14 @@ void init() {
 }
 
     
-int kmain(unsigned int ebx)
+int kmain(int arg1, int arg2, int arg3)
 {
+    	char buffer[25] = "--- helloworld ---";
+    	fb_write(buffer, 18);
+    	serial_configure(SERIAL_COM1_BASE, 1);
+    	serial_write(SERIAL_COM1_BASE, buffer, 18);
+	//fb_write_cell(0, 'A', FB_GREEN, FB_DARK_GREY);
+	//fb_move_cursor(00);
 	interrupts_install_idt();
-	    	init();
-    	
-  	multiboot_info_t *mbinfo = (multiboot_info_t *) ebx;
-  	multiboot_module_t* modules = (multiboot_module_t*) mbinfo->mods_addr; 
-  	unsigned int address_of_module = modules->mod_start;
-  	
-  	if((mbinfo->mods_count) == 1){
-  		char message[] = "ONE module loaded successfully!";
-  		serial_write(0x3F8,message,sizeof(message));
-  		
-  		typedef void (*call_module_t)(void);
-        	/* ... */
-        	call_module_t start_program = (call_module_t) address_of_module;
-        	start_program();
-        	/* we'll never get here, unless the module code returns */
-
-  	}else{
-  		char message[] = "Error: More than ONE module loaded";
-  		serial_write(0x3F8,message,sizeof(message));
-  	}
-	return 0;
+	return arg1 + arg2 + arg3;
 }
