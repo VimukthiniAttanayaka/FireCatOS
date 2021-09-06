@@ -3,6 +3,7 @@
 #include "Memory_segment.h"
 #include "interrupt/interrupts.h"
 #include "multiboot.h"
+#include "paging.h"
 
 char *fb = (char*) 0x000B8000;
 
@@ -63,6 +64,7 @@ char *fb = (char*) 0x000B8000;
 void init() {
   /* Initialize segment descriptor tables */
   init_gdt();
+  init_paging();
 
   /* Initialize serial port */
   serial_configure(SERIAL_COM1_BASE, 1);
