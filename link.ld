@@ -1,5 +1,6 @@
 ENTRY(loader)                /* the name of the entry label */
 
+OUTPUT_FORMAT("binary")    /* output flat binary */
 SECTIONS {
     . = 0xC0100000;          /* the code should be relocated to 3GB + 1 MB */
 
@@ -29,7 +30,25 @@ SECTIONS {
         *(COMMON)            /* all COMMON sections from all files */
         *(.bss)              /* all bss sections from all files */
     }
+    
+        . = 0;                 /* relocate to address 0 */
+
+        .text ALIGN(4):
+        {
+            start.o(.text)     /* include the .text section of start.o */
+            *(.text)           /* include all other .text sections */
+        }
+
+        .data ALIGN(4):
+        {
+            *(.data)
+        }
+
+        .rodata ALIGN(4):
+        {
+            *(.rodata*)
+        }
+    }
 
     KERNEL_PHYSICAL_END = . - 0xC0000000;
-}
 
