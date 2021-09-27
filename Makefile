@@ -1,4 +1,4 @@
-OBJECTS = loader.o kmain.o io.o gdt.o interrupt_handlers.o interrupts.o pic.o keyboard.o idt.o serial.o common.o paging_simple.o paging_enable.o kheap.o
+OBJECTS = loader.o kmain.o io.o gdt.o interrupt_handlers.o interrupts.o pic.o keyboard.o idt.o serial.o common.o paging_simple.o start.o paging_enable.o kheap.o
     CC = gcc
     CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
              -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
