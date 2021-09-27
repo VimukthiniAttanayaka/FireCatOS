@@ -4,10 +4,12 @@
 #include "interrupt/interrupts.h"
 #include "multiboot.h"
 #include "paging.h"
+#include "utils/type.h"
+#include "kheap.h"
 
-char *fb = (char*) 0x000B8000;
+char *fb = (char*) 0xC00B8000;
 
- /** fb_write_cell:
+/** fb_write_cell:
      *  Writes a character with the given foreground and background to position i
      *  in the framebuffer.
      *

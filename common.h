@@ -1,7 +1,11 @@
+#ifndef COMMON_H
 #define COMMON_H
 
-typedef unsigned int   u32int;
-typedef unsigned char  u8int;
+#pragma once
+#include "./utils/type.h"
 
-void memset(u8int *dest, u8int val, u32int len);
+/* Helper function for memset, used in paging and heap
+ */
+//void custom_memset(u8int *address, u32int val, u32int size);
 
+#endif
