@@ -1,4 +1,8 @@
 #include "kheap.h"
+#include "./utils/array/ordered_array.h"
+#include "./paging.h"
+
+#include "kheap.h"
 
 // kernel_end is defined in the linker script.
 extern u32int kernel_end;
